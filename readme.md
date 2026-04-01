@@ -6,6 +6,12 @@ The only data that this extension uses are the options you select.
 
 Please log feature requests, or bug reports on the [Github Repo](https://github.com/omegadefender/Zucker/issues)
 
+### 0.0.2.5 Update
+
+- Added options to hide "Reels" from the top banner/nav menu
+- Removed redundant options "Video" and "Gaming" as these are no longer in the top banner/nav menu
+- Code improvements to javascript to allow for better performance
+
 ### 0.0.2.4 Update
 
 - Hotfix for some news feed options that broke with latest FB release

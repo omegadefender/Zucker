@@ -14,6 +14,7 @@ chrome.storage.sync.get(function(options) {
         site_wide_options.push(this[key])
       } else if (key.includes("HomePage")) {
         home_page_options.push(this[key])
+        console.log(key)
       } else if (key.includes("SideBar")) {
         sidebar_options.push(this[key])
       } else if (key.includes("GroupsPage")) {
@@ -22,7 +23,8 @@ chrome.storage.sync.get(function(options) {
     }     
   })    
 })
-
+//console.log("Home Page options", home_page_options);
+console.log("Banner options", banner_options);
 function onRemoved() {
   console.log("Zucker Ext - Defunct options removed");
 }
@@ -31,7 +33,10 @@ function onError(e) {
   console.log(e);
 }
 
-const defunctOptions = ["sponsoredAdHomePage", "metaQuestHomePage", "videoSiteWide", "gamingSiteWide"]
+const defunctOptions = ["sponsoredAdHomePage", "metaQuestHomePage", "videoSiteWide", "gamingSiteWide", "adsManagerHomePage", "autoClickSeeMoreHomePage", "birthdaysHomePage", 
+  "bloodDonationsHomePage", "climateScienceCentreHomePage", "eventsHomePage", "feedsHomePage", "findFriendsHomePage", "fundraisersHomePage", "gamingVideoHomePage", "groupsHomePage",
+  "marketplaceHomePage", "memoriesHomePage", "messengerHomePage", "messengerKidsHomePage", "metaQuest3SHomePage", "ordersPaymentsHomePage", "pagesHomePage", "paidPartnershipHomePage",
+  "playGamesHomePage", "recentAdActivityHomePage", "reelsHomePage", "removeSeeLessHomePage", "savedHomePage", "videoHomePage"]
 const removeDefunctOptions = chrome.storage.sync.remove(defunctOptions);
 removeDefunctOptions.then(onRemoved, onError);
 
@@ -50,15 +55,18 @@ function htmlChopper(xPath) {
 }
 
 const first_URL = urlChopper(window.location.href)
-//console.log(first_URL)
-
+console.log("First URL is ", first_URL)
+/*
 document.addEventListener('DOMContentLoaded', () => {
   banner_options.forEach((option) => {
     option()       
   });
 });
-
+*/
 window.addEventListener("load", () => {
+  banner_options.forEach((option) => {
+    option()       
+  });
   if (first_URL == "") {
     main_page_observer.observe(main_page_node, config);
     sidebar_observer.observe(main_page_node, config);
@@ -127,7 +135,8 @@ let main_page_observer = new MutationObserver((mutations) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
         //console.log("Added MAIN PAGE element HTML:", node.outerHTML, "\n");
         home_page_options.forEach((option) => {
-          option()
+          //console.log(option.name);
+          option();
         })
       }
     });
@@ -195,13 +204,11 @@ function pumkSiteWide(url) {
 
 //Home Page News Feed (main) Options
 function sponsoredAdsHomePage() {
-  if (url == '') {
     const xPath_feed = "//a[contains(@href, '/ads/about')]/ancestor::div[contains(@class, 'x1lliihq')]"
     //split the right rail into a seperate function    
     const xPath_right_rail = "//span[text() = 'Sponsored']/ancestor::div[8]"
     htmlChopper(xPath_feed)
     htmlChopper(xPath_right_rail)
-  }
 }
 
 function pumkHomePage() {
@@ -270,124 +277,122 @@ function addedANewPhotoToTheAlbumHomePage() {
 } 
 
 //Side bar options on the Home page (navigation) 
-function autoClickSeeMoreHomePage() {
+function autoClickSeeMoreSideBar() {
   const xPath = "//span[text() = 'See more']/ancestor::div[6]"
   htmlChopper(xPath)
 }
 
-function removeSeeLessHomePage() {
+function removeSeeLessSideBar() {
   const xPath = "//span[text() = 'See less']/ancestor::div[contains(@data-visualcompletion, 'ignore-dynamic')][1]"
   htmlChopper(xPath)
 }
 
-function findFriendsHomePage() {
+function findFriendsSideBar() {
   const xPath = "//span[text() = 'Find friends']/ancestor::li"
   htmlChopper(xPath)
 }
 
-//feeds should go here
-
-function groupsHomePage() {
+function groupsSideBar() {
   const xPath = "//span[text() = 'Groups']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function videoHomePage() {
+function videoSideBar() {
   const xPath = "//span[text() = 'Video']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function memoriesHomePage() {
+function memoriesSideBar() {
   const xPath = "//span[text() = 'Memories']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function gamingVideoHomePage() {
+function gamingVideoSideBar() {
   const xPath = "//span[text() = 'Gaming video']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function savedHomePage() {
+function savedSideBar() {
   const xPath = "//span[text() = 'Saved']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function eventsHomePage() {
+function eventsSideBar() {
   const xPath = "//span[text() = 'Events']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function adsManagerHomePage() {
+function adsManagerSideBar() {
   const xPath = "//span[text() = 'Ads Manager']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function bloodDonationsHomePage() {
+function bloodDonationsSideBar() {
   const xPath = "//span[text() = 'Blood Donations']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function climateScienceCentreHomePage() {
+function climateScienceCentreSideBar() {
   const xPath = "//span[text() = 'Climate Science Centre']/ancestor::li"
   htmlChopper(xPath) 
 }
 
-function fundraisersHomePage() {
+function fundraisersSideBar() {
   const xPath = "//span[text() = 'Fundraisers']/ancestor::li"
   htmlChopper(xPath) 
 }
 
-function marketplaceHomePage() {
+function marketplaceSideBar() {
   const xPath = "//span[text() = 'Marketplace']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function messengerHomePage() {
+function messengerSideBar() {
   const xPath = "//span[text() = 'Messenger']/ancestor::li"
   htmlChopper(xPath) 
 }
 
-function messengerKidsHomePage() {
+function messengerKidsSideBar() {
   const xPath = "//span[text() = 'Messenger Kids']/ancestor::li"
   htmlChopper(xPath) 
 }
 
-function metaQuest3SHomePage() {
+function metaQuest3SSideBar() {
   const xPath = "//span[text() = 'Meta Quest 3S']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function ordersPaymentsHomePage() {
+function ordersPaymentsSideBar() {
   const xPath = "//span[text() = 'Orders and payments']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function pagesHomePage() {
+function pagesSideBar() {
   const xPath = "//span[text() = 'Pages']/ancestor::li"
   htmlChopper(xPath) 
 }
 
-function playGamesHomePage() {
+function playGamesSideBar() {
   const xPath = "//span[text() = 'Play games']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function recentAdActivityHomePage() {
+function recentAdActivitySideBar() {
   const xPath = "//span[text() = 'Recent ad activity']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function birthdaysHomePage() {
+function birthdaysSideBar() {
   const xPath = "//span[text() = 'Birthdays']/ancestor::li"
   htmlChopper(xPath)
 }
 
-function reelsHomePage() {
+function reelsSideBar() {
   const xPath = "//span[text() = 'Reels']/ancestor::li"
   htmlChopper(xPath)  
 }
 
-function feedsHomePage() {
+function feedsSideBar() {
   const xPath = "//span[text() = 'Feeds']/ancestor::li"
   htmlChopper(xPath)  
 }

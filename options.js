@@ -19,33 +19,35 @@ function save_options() {
   const andHomePage = document.getElementById('andHomePage').checked  
   const albumHomePage = document.getElementById('albumHomePage').checked
   const addedANewPhotoToTheAlbumHomePage = document.getElementById('addedANewPhotoToTheAlbumHomePage').checked
-  const autoClickSeeMoreHomePage = document.getElementById('autoClickSeeMoreHomePage').checked
-  const removeSeeLessHomePage = document.getElementById('removeSeeLessHomePage').checked
-  const groupsHomePage = document.getElementById('groupsHomePage').checked
-  const videoHomePage = document.getElementById('videoHomePage').checked  
-  const findFriendsHomePage = document.getElementById('findFriendsHomePage').checked
-  const memoriesHomePage = document.getElementById('memoriesHomePage').checked
-  const gamingVideoHomePage = document.getElementById('gamingVideoHomePage').checked
-  const savedHomePage = document.getElementById('savedHomePage').checked
-  const eventsHomePage = document.getElementById('eventsHomePage').checked
-  const adsManagerHomePage = document.getElementById('adsManagerHomePage').checked
-  const bloodDonationsHomePage = document.getElementById('bloodDonationsHomePage').checked
-  const climateScienceCentreHomePage = document.getElementById('climateScienceCentreHomePage').checked
-  const fundraisersHomePage = document.getElementById('fundraisersHomePage').checked
-  const marketplaceHomePage = document.getElementById('marketplaceHomePage').checked
-  const messengerHomePage = document.getElementById('messengerHomePage').checked
-  const messengerKidsHomePage = document.getElementById('messengerKidsHomePage').checked
-  const metaQuest3SHomePage = document.getElementById('metaQuest3SHomePage').checked
-  const ordersPaymentsHomePage = document.getElementById('ordersPaymentsHomePage').checked
-  const pagesHomePage = document.getElementById('pagesHomePage').checked
-  const playGamesHomePage = document.getElementById('playGamesHomePage').checked
-  const recentAdActivityHomePage = document.getElementById('recentAdActivityHomePage').checked
+  //Side bar options on the Home page (navigation) 
+  const autoClickSeeMoreSideBar = document.getElementById('autoClickSeeMoreSideBar').checked
+  const removeSeeLessSideBar = document.getElementById('removeSeeLessSideBar').checked
+  const findFriendsSideBar = document.getElementById('findFriendsSideBar').checked
+  const groupsSideBar = document.getElementById('groupsSideBar').checked
+  const videoSideBar = document.getElementById('videoSideBar').checked  
+  const memoriesSideBar = document.getElementById('memoriesSideBar').checked
+  const gamingVideoSideBar = document.getElementById('gamingVideoSideBar').checked
+  const savedSideBar = document.getElementById('savedSideBar').checked
+  const eventsSideBar = document.getElementById('eventsSideBar').checked
+  const adsManagerSideBar = document.getElementById('adsManagerSideBar').checked
+  const bloodDonationsSideBar = document.getElementById('bloodDonationsSideBar').checked
+  const climateScienceCentreSideBar = document.getElementById('climateScienceCentreSideBar').checked
+  const fundraisersSideBar = document.getElementById('fundraisersSideBar').checked
+  const marketplaceSideBar = document.getElementById('marketplaceSideBar').checked
+  const messengerSideBar = document.getElementById('messengerSideBar').checked
+  const messengerKidsSideBar = document.getElementById('messengerKidsSideBar').checked
+  const metaQuest3SSideBar = document.getElementById('metaQuest3SSideBar').checked
+  const ordersPaymentsSideBar = document.getElementById('ordersPaymentsSideBar').checked
+  const pagesSideBar = document.getElementById('pagesSideBar').checked
+  const playGamesSideBar = document.getElementById('playGamesSideBar').checked
+  const recentAdActivitySideBar = document.getElementById('recentAdActivitySideBar').checked
+  const birthdaysSideBar = document.getElementById('birthdaysSideBar').checked
+  const reelsSideBar = document.getElementById('reelsSideBar').checked
+  const feedsSideBar = document.getElementById('feedsSideBar').checked
+  //Groups Page
   const suggestedPostsGroupsPage = document.getElementById('suggestedPostsGroupsPage').checked
   const suggestedForYouGroupsPage = document.getElementById('suggestedForYouGroupsPage').checked
   const friendsGroupsGroupsPage = document.getElementById('friendsGroupsGroupsPage').checked
-  const birthdaysHomePage = document.getElementById('birthdaysHomePage').checked
-  const reelsHomePage = document.getElementById('reelsHomePage').checked
-  const feedsHomePage = document.getElementById('feedsHomePage').checked
 
   chrome.storage.sync.set({
     //Banner options
@@ -66,33 +68,35 @@ function save_options() {
     andHomePage: andHomePage,
     albumHomePage: albumHomePage,
     addedANewPhotoToTheAlbumHomePage: addedANewPhotoToTheAlbumHomePage,
-    autoClickSeeMoreHomePage: autoClickSeeMoreHomePage,
-    removeSeeLessHomePage: removeSeeLessHomePage,
-    groupsHomePage: groupsHomePage,
-    videoHomePage: videoHomePage,
-    findFriendsHomePage: findFriendsHomePage,
-    memoriesHomePage: memoriesHomePage,
-    gamingVideoHomePage: gamingVideoHomePage,
-    savedHomePage: savedHomePage,
-    eventsHomePage: eventsHomePage,
-    adsManagerHomePage: adsManagerHomePage,
-    bloodDonationsHomePage: bloodDonationsHomePage,
-    climateScienceCentreHomePage: climateScienceCentreHomePage,
-    fundraisersHomePage: fundraisersHomePage,
-    marketplaceHomePage: marketplaceHomePage,
-    messengerHomePage: messengerHomePage,
-    messengerKidsHomePage: messengerKidsHomePage,
-    metaQuest3SHomePage: metaQuest3SHomePage,
-    ordersPaymentsHomePage: ordersPaymentsHomePage,
-    pagesHomePage: pagesHomePage,
-    playGamesHomePage: playGamesHomePage,
-    recentAdActivityHomePage: recentAdActivityHomePage,
+    //Side bar options on the Home page (navigation) 
+    autoClickSeeMoreSideBar: autoClickSeeMoreSideBar,
+    removeSeeLessSideBar: removeSeeLessSideBar,
+    findFriendsSideBar: findFriendsSideBar,
+    groupsSideBar: groupsSideBar,
+    videoSideBar: videoSideBar,    
+    memoriesSideBar: memoriesSideBar,
+    gamingVideoSideBar: gamingVideoSideBar,
+    savedSideBar: savedSideBar,
+    eventsSideBar: eventsSideBar,
+    adsManagerSideBar: adsManagerSideBar,
+    bloodDonationsSideBar: bloodDonationsSideBar,
+    climateScienceCentreSideBar: climateScienceCentreSideBar,
+    fundraisersSideBar: fundraisersSideBar,
+    marketplaceSideBar: marketplaceSideBar,
+    messengerSideBar: messengerSideBar,
+    messengerKidsSideBar: messengerKidsSideBar,
+    metaQuest3SSideBar: metaQuest3SSideBar,
+    ordersPaymentsSideBar: ordersPaymentsSideBar,
+    pagesSideBar: pagesSideBar,
+    playGamesSideBar: playGamesSideBar,
+    recentAdActivitySideBar: recentAdActivitySideBar,
+    birthdaysSideBar: birthdaysSideBar,
+    reelsSideBar: reelsSideBar,
+    feedsSideBar: feedsSideBar,
+    //Groups Page
     suggestedPostsGroupsPage: suggestedPostsGroupsPage,
     suggestedForYouGroupsPage: suggestedForYouGroupsPage,
-    friendsGroupsGroupsPage: friendsGroupsGroupsPage,
-    birthdaysHomePage: birthdaysHomePage,
-    reelsHomePage: reelsHomePage,
-    feedsHomePage: feedsHomePage
+    friendsGroupsGroupsPage: friendsGroupsGroupsPage    
   }, function() {
     const status = document.getElementById('status')
     status.style.visibility = 'visible'
@@ -121,34 +125,36 @@ function restore_options() {
     isAtHomePage: false,
     andHomePage: false,
     albumHomePage: false,
-    addedANewPhotoToTheAlbumHomePage: false,    
-    autoClickSeeMoreHomePage: false,
-    removeSeeLessHomePage: false,
-    groupsHomePage: false,
-    videoHomePage: false,
-    findFriendsHomePage: false,
-    memoriesHomePage: false,
-    gamingVideoHomePage: false,
-    savedHomePage: false,
-    eventsHomePage: false,
-    adsManagerHomePage: false,
-    bloodDonationsHomePage: false,
-    climateScienceCentreHomePage: false,
-    fundraisersHomePage: false,
-    marketplaceHomePage: false,
-    messengerHomePage: false,
-    messengerKidsHomePage: false,
-    ordersPaymentsHomePage: false,
-    pagesHomePage: false,
-    playGamesHomePage: false,
-    recentAdActivityHomePage: false,
+    addedANewPhotoToTheAlbumHomePage: false,
+    //Side bar options on the Home page (navigation)     
+    autoClickSeeMoreSideBar: false,
+    removeSeeLessSideBar: false,
+    findFriendsSideBar: false,
+    groupsSideBar: false,
+    videoSideBar: false,    
+    memoriesSideBar: false,
+    gamingVideoSideBar: false,
+    savedSideBar: false,
+    eventsSideBar: false,
+    adsManagerSideBar: false,
+    bloodDonationsSideBar: false,
+    climateScienceCentreSideBar: false,
+    fundraisersSideBar: false,
+    marketplaceSideBar: false,
+    messengerSideBar: false,
+    messengerKidsSideBar: false,
+    ordersPaymentsSideBar: false,
+    pagesSideBar: false,
+    playGamesSideBar: false,
+    recentAdActivitySideBar: false,
+    metaQuest3SSideBar: false,
+    birthdaysSideBar: false,
+    reelsSideBar: false,
+    feedsSideBar: false,
+    //Groups Page
     suggestedPostsGroupsPage: false,
     suggestedForYouGroupsPage: false,
-    friendsGroupsGroupsPage: false,
-    metaQuest3SHomePage: false,
-    birthdaysHomePage: false,
-    reelsHomePage: false,
-    feedsHomePage: false
+    friendsGroupsGroupsPage: false    
 }, function(items) {
     //banner options
     document.getElementById('reelsBanner').checked = items.reelsBanner
@@ -167,34 +173,36 @@ function restore_options() {
     document.getElementById('isAtHomePage').checked = items.isAtHomePage
     document.getElementById('andHomePage').checked = items.andHomePage
     document.getElementById('albumHomePage').checked = items.albumHomePage
-    document.getElementById('addedANewPhotoToTheAlbumHomePage').checked = items.addedANewPhotoToTheAlbumHomePage        
-    document.getElementById('autoClickSeeMoreHomePage').checked = items.autoClickSeeMoreHomePage
-    document.getElementById('removeSeeLessHomePage').checked = items.removeSeeLessHomePage
-    document.getElementById('groupsHomePage').checked = items.groupsHomePage
-    document.getElementById('videoHomePage').checked = items.videoHomePage
-    document.getElementById('findFriendsHomePage').checked = items.findFriendsHomePage
-    document.getElementById('memoriesHomePage').checked = items.memoriesHomePage
-    document.getElementById('gamingVideoHomePage').checked = items.gamingVideoHomePage
-    document.getElementById('savedHomePage').checked = items.savedHomePage
-    document.getElementById('eventsHomePage').checked = items.eventsHomePage
-    document.getElementById('adsManagerHomePage').checked = items.adsManagerHomePage
-    document.getElementById('bloodDonationsHomePage').checked = items.bloodDonationsHomePage
-    document.getElementById('climateScienceCentreHomePage').checked = items.climateScienceCentreHomePage
-    document.getElementById('fundraisersHomePage').checked = items.fundraisersHomePage
-    document.getElementById('marketplaceHomePage').checked = items.marketplaceHomePage
-    document.getElementById('messengerHomePage').checked = items.messengerHomePage
-    document.getElementById('messengerKidsHomePage').checked = items.messengerKidsHomePage
-    document.getElementById('metaQuest3SHomePage').checked = items.metaQuest3SHomePage
-    document.getElementById('ordersPaymentsHomePage').checked = items.ordersPaymentsHomePage
-    document.getElementById('pagesHomePage').checked = items.pagesHomePage
-    document.getElementById('playGamesHomePage').checked = items.playGamesHomePage
-    document.getElementById('recentAdActivityHomePage').checked = items.recentAdActivityHomePage
+    document.getElementById('addedANewPhotoToTheAlbumHomePage').checked = items.addedANewPhotoToTheAlbumHomePage
+    //Side bar options on the Home page (navigation) 
+    document.getElementById('autoClickSeeMoreSideBar').checked = items.autoClickSeeMoreSideBar
+    document.getElementById('removeSeeLessSideBar').checked = items.removeSeeLessSideBar
+    document.getElementById('findFriendsSideBar').checked = items.findFriendsSideBar
+    document.getElementById('groupsSideBar').checked = items.groupsSideBar
+    document.getElementById('videoSideBar').checked = items.videoSideBar    
+    document.getElementById('memoriesSideBar').checked = items.memoriesSideBar
+    document.getElementById('gamingVideoSideBar').checked = items.gamingVideoSideBar
+    document.getElementById('savedSideBar').checked = items.savedSideBar
+    document.getElementById('eventsSideBar').checked = items.eventsSideBar
+    document.getElementById('adsManagerSideBar').checked = items.adsManagerSideBar
+    document.getElementById('bloodDonationsSideBar').checked = items.bloodDonationsSideBar
+    document.getElementById('climateScienceCentreSideBar').checked = items.climateScienceCentreSideBar
+    document.getElementById('fundraisersSideBar').checked = items.fundraisersSideBar
+    document.getElementById('marketplaceSideBar').checked = items.marketplaceSideBar
+    document.getElementById('messengerSideBar').checked = items.messengerSideBar
+    document.getElementById('messengerKidsSideBar').checked = items.messengerKidsSideBar
+    document.getElementById('metaQuest3SSideBar').checked = items.metaQuest3SSideBar
+    document.getElementById('ordersPaymentsSideBar').checked = items.ordersPaymentsSideBar
+    document.getElementById('pagesSideBar').checked = items.pagesSideBar
+    document.getElementById('playGamesSideBar').checked = items.playGamesSideBar
+    document.getElementById('recentAdActivitySideBar').checked = items.recentAdActivitySideBar
+    document.getElementById('birthdaysSideBar').checked = items.birthdaysSideBar
+    document.getElementById('reelsSideBar').checked = items.reelsSideBar 
+    document.getElementById('feedsSideBar').checked = items.feedsSideBar
+    //Groups Page
     document.getElementById('suggestedPostsGroupsPage').checked = items.suggestedPostsGroupsPage
     document.getElementById('suggestedForYouGroupsPage').checked = items.suggestedForYouGroupsPage
-    document.getElementById('friendsGroupsGroupsPage').checked = items.friendsGroupsGroupsPage  
-    document.getElementById('birthdaysHomePage').checked = items.birthdaysHomePage
-    document.getElementById('reelsHomePage').checked = items.reelsHomePage 
-    document.getElementById('feedsHomePage').checked = items.feedsHomePage            
+    document.getElementById('friendsGroupsGroupsPage').checked = items.friendsGroupsGroupsPage             
   });
 }
   
