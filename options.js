@@ -1,12 +1,12 @@
 const saveButton = document.getElementById('save')
 
 function save_options() {
+  //Banner options
+  const reelsBanner = document.getElementById('reelsBanner').checked
   //Site options
-  const sponsoredAdsSiteWide = document.getElementById('sponsoredAdsSiteWide').checked
   const pumkSiteWide = document.getElementById('pumkSiteWide').checked
-  const videoSiteWide = document.getElementById('videoSiteWide').checked
-  const gamingSiteWide = document.getElementById('gamingSiteWide').checked
   //Hompage - news feed options
+  const sponsoredAdsHomePage = document.getElementById('sponsoredAdsSiteWide').checked
   const joinHomePage = document.getElementById('joinHomePage').checked
   const storiesHomePage = document.getElementById('storiesHomePage').checked
   const reelsAndShortVideosHomePage = document.getElementById('reelsAndShortVideosHomePage').checked    
@@ -48,12 +48,12 @@ function save_options() {
   const feedsHomePage = document.getElementById('feedsHomePage').checked
 
   chrome.storage.sync.set({
+    //Banner options
+    reelsBanner: reelsBanner,
     //Site options
-    sponsoredAdsSiteWide: sponsoredAdsSiteWide,
     pumkSiteWide: pumkSiteWide,
-    videoSiteWide: videoSiteWide,
-    gamingSiteWide: gamingSiteWide,
     //Hompage - news feed options
+    sponsoredAdsHomePage: sponsoredAdsHomePage,
     joinHomePage: joinHomePage,
     storiesHomePage: storiesHomePage,
     reelsAndShortVideosHomePage: reelsAndShortVideosHomePage,
@@ -104,12 +104,12 @@ function save_options() {
   
 function restore_options() {
   chrome.storage.sync.get({
+    //Banner Options
+    reelsBanner: false,
     //Site options
-    sponsoredAdsSiteWide: true,
     pumkSiteWide: false,
-    videoSiteWide: false,
-    gamingSiteWide: false,
     //Hompage - news feed options
+    sponsoredAdsHomePage: true,
     joinHomePage: true,
     storiesHomePage: false,
     reelsAndShortVideosHomePage: false,      
@@ -150,12 +150,12 @@ function restore_options() {
     reelsHomePage: false,
     feedsHomePage: false
 }, function(items) {
+    //banner options
+    document.getElementById('reelsBanner').checked = items.reelsBanner
     //Site options  
-    document.getElementById('sponsoredAdsSiteWide').checked = items.sponsoredAdsSiteWide
     document.getElementById('pumkSiteWide').checked = items.pumkSiteWide
-    document.getElementById('videoSiteWide').checked = items.videoSiteWide
-    document.getElementById('gamingSiteWide').checked = items.gamingSiteWide
     //Hompage - news feed options
+    document.getElementById('sponsoredAdsSiteWide').checked = items.sponsoredAdsHomePage
     document.getElementById('joinHomePage').checked = items.joinHomePage
     document.getElementById('storiesHomePage').checked = items.storiesHomePage
     document.getElementById('reelsAndShortVideosHomePage').checked = items.reelsAndShortVideosHomePage        
