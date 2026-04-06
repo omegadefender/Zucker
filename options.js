@@ -3,10 +3,9 @@ const saveButton = document.getElementById('save')
 function save_options() {
   //Banner options
   const reelsBanner = document.getElementById('reelsBanner').checked
-  //Site options
-  const pumkSiteWide = document.getElementById('pumkSiteWide').checked
   //Hompage - news feed options
   const sponsoredAdsHomePage = document.getElementById('sponsoredAdsSiteWide').checked
+  const pumkHomePage = document.getElementById('pumkSiteWide').checked
   const joinHomePage = document.getElementById('joinHomePage').checked
   const storiesHomePage = document.getElementById('storiesHomePage').checked
   const reelsAndShortVideosHomePage = document.getElementById('reelsAndShortVideosHomePage').checked    
@@ -44,6 +43,8 @@ function save_options() {
   const birthdaysSideBar = document.getElementById('birthdaysSideBar').checked
   const reelsSideBar = document.getElementById('reelsSideBar').checked
   const feedsSideBar = document.getElementById('feedsSideBar').checked
+  //Friends Page
+  const pumkFriendsPage = document.getElementById('pumkSiteWide').checked
   //Groups Page
   const suggestedPostsGroupsPage = document.getElementById('suggestedPostsGroupsPage').checked
   const suggestedForYouGroupsPage = document.getElementById('suggestedForYouGroupsPage').checked
@@ -52,10 +53,9 @@ function save_options() {
   chrome.storage.sync.set({
     //Banner options
     reelsBanner: reelsBanner,
-    //Site options
-    pumkSiteWide: pumkSiteWide,
     //Hompage - news feed options
     sponsoredAdsHomePage: sponsoredAdsHomePage,
+    pumkHomePage: pumkHomePage,
     joinHomePage: joinHomePage,
     storiesHomePage: storiesHomePage,
     reelsAndShortVideosHomePage: reelsAndShortVideosHomePage,
@@ -93,6 +93,8 @@ function save_options() {
     birthdaysSideBar: birthdaysSideBar,
     reelsSideBar: reelsSideBar,
     feedsSideBar: feedsSideBar,
+    //Friends Page
+    pumkFriendsPage: pumkFriendsPage,
     //Groups Page
     suggestedPostsGroupsPage: suggestedPostsGroupsPage,
     suggestedForYouGroupsPage: suggestedForYouGroupsPage,
@@ -110,10 +112,9 @@ function restore_options() {
   chrome.storage.sync.get({
     //Banner Options
     reelsBanner: false,
-    //Site options
-    pumkSiteWide: false,
     //Hompage - news feed options
     sponsoredAdsHomePage: true,
+    pumkHomePage: false,
     joinHomePage: true,
     storiesHomePage: false,
     reelsAndShortVideosHomePage: false,      
@@ -151,6 +152,8 @@ function restore_options() {
     birthdaysSideBar: false,
     reelsSideBar: false,
     feedsSideBar: false,
+    //Friends Page
+    pumkFriendsPage: false,
     //Groups Page
     suggestedPostsGroupsPage: false,
     suggestedForYouGroupsPage: false,
@@ -158,10 +161,9 @@ function restore_options() {
 }, function(items) {
     //banner options
     document.getElementById('reelsBanner').checked = items.reelsBanner
-    //Site options  
-    document.getElementById('pumkSiteWide').checked = items.pumkSiteWide
     //Hompage - news feed options
     document.getElementById('sponsoredAdsSiteWide').checked = items.sponsoredAdsHomePage
+    document.getElementById('pumkSiteWide').checked = items.pumkHomePage
     document.getElementById('joinHomePage').checked = items.joinHomePage
     document.getElementById('storiesHomePage').checked = items.storiesHomePage
     document.getElementById('reelsAndShortVideosHomePage').checked = items.reelsAndShortVideosHomePage        
@@ -199,6 +201,8 @@ function restore_options() {
     document.getElementById('birthdaysSideBar').checked = items.birthdaysSideBar
     document.getElementById('reelsSideBar').checked = items.reelsSideBar 
     document.getElementById('feedsSideBar').checked = items.feedsSideBar
+    //Friends Page
+    document.getElementById('pumkSiteWide').checked = items.pumkFriendsPage
     //Groups Page
     document.getElementById('suggestedPostsGroupsPage').checked = items.suggestedPostsGroupsPage
     document.getElementById('suggestedForYouGroupsPage').checked = items.suggestedForYouGroupsPage

@@ -1,8 +1,8 @@
 //options sorting
 const banner_options = [];
-const site_wide_options = [];
 const home_page_options = [];
 const sidebar_options = [];
+const friends_page_options = [];
 const group_page_options = [];
 
 chrome.storage.sync.get(function(options) {
@@ -10,13 +10,13 @@ chrome.storage.sync.get(function(options) {
     if (options[key]) {
       if (key.includes("Banner")) {
         banner_options.push(this[key])
-      } else if (key.includes("SiteWide")) {
-        site_wide_options.push(this[key])
       } else if (key.includes("HomePage")) {
         home_page_options.push(this[key])
-        console.log(key)
+        //console.log(key)
       } else if (key.includes("SideBar")) {
         sidebar_options.push(this[key])
+      } else if (key.includes("FriendsPage")) {
+        friends_page_options.push(this[key])
       } else if (key.includes("GroupsPage")) {
         group_page_options.push(this[key])
       }
@@ -36,7 +36,7 @@ function onError(e) {
 const defunctOptions = ["sponsoredAdHomePage", "metaQuestHomePage", "videoSiteWide", "gamingSiteWide", "adsManagerHomePage", "autoClickSeeMoreHomePage", "birthdaysHomePage", 
   "bloodDonationsHomePage", "climateScienceCentreHomePage", "eventsHomePage", "feedsHomePage", "findFriendsHomePage", "fundraisersHomePage", "gamingVideoHomePage", "groupsHomePage",
   "marketplaceHomePage", "memoriesHomePage", "messengerHomePage", "messengerKidsHomePage", "metaQuest3SHomePage", "ordersPaymentsHomePage", "pagesHomePage", "paidPartnershipHomePage",
-  "playGamesHomePage", "recentAdActivityHomePage", "reelsHomePage", "removeSeeLessHomePage", "savedHomePage", "videoHomePage"]
+  "playGamesHomePage", "recentAdActivityHomePage", "reelsHomePage", "removeSeeLessHomePage", "savedHomePage", "videoHomePage", "pumkSiteWide"]
 const removeDefunctOptions = chrome.storage.sync.remove(defunctOptions);
 removeDefunctOptions.then(onRemoved, onError);
 
@@ -61,17 +61,44 @@ document.addEventListener('DOMContentLoaded', () => {
   banner_options.forEach((option) => {
     option()       
   });
+  if (first_URL == "") {
+    home_page_options.forEach((option) => {
+      option();
+    });
+    sidebar_options.forEach((option) => {
+      option();
+    });
+    main_page_observer.observe(main_page_node, config);
+    sidebar_observer.observe(main_page_node, config);
+  } else if (first_URL == "friends") {
+    
+  } else if (first_URL == "marketplace" || "marketplace/?ref=app_tab") {
+
+  } else if (first_URL == "groups/feed/" || "groups/feed/#") {
+
+  } else if (first_URL == "?filter=all&sk=h_chr") {
+
+  }
 });
 */
+
 window.addEventListener("load", () => {
   banner_options.forEach((option) => {
     option()       
   });
   if (first_URL == "") {
+    home_page_options.forEach((option) => {
+      option();
+    });
+    sidebar_options.forEach((option) => {
+      option();
+    });
     main_page_observer.observe(main_page_node, config);
     sidebar_observer.observe(main_page_node, config);
   } else if (first_URL == "friends") {
-    
+    friends_page_options.forEach((option) => {
+      option();
+    });
   } else if (first_URL == "marketplace" || "marketplace/?ref=app_tab") {
 
   } else if (first_URL == "groups/feed/" || "groups/feed/#") {
@@ -87,13 +114,15 @@ window.navigation.addEventListener("navigate", (event) => {
   if (new_url == "") {
     main_page_observer.observe(main_page_node, config);
     sidebar_observer.observe(main_page_node, config);
-  } else if (first_URL == "friends") {
-    
-  } else if (first_URL == "marketplace" || "marketplace/?ref=app_tab") {
+  } else if (new_url == "friends") {
+    friends_page_options.forEach((option) => {
+      option();
+    });
+  } else if (new_url == "marketplace" || "marketplace/?ref=app_tab") {
 
-  } else if (first_URL == "groups/feed/" || "groups/feed/#") {
+  } else if (new_url == "groups/feed/" || "groups/feed/#") {
 
-  } else if (first_URL == "?filter=all&sk=h_chr") {
+  } else if (new_url == "?filter=all&sk=h_chr") {
 
   }
 });
@@ -190,13 +219,8 @@ function sponsoredAdsSiteWide(url) {
 function pumkSiteWide(url) {  
   let xpath = ""
   let html = null
-  if (url.includes("friends")) {
-    xpath = "//span[text() = 'People you may know']/ancestor::div[9]"
-    html = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-  } else {
-    xpath = "//span[text() = 'People you may know']/ancestor::div[7]"
-    html = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-  }
+  xpath = "//span[text() = 'People you may know']/ancestor::div[7]"
+  html = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
   if (html != null) {
     html.remove()
   }    
@@ -204,7 +228,7 @@ function pumkSiteWide(url) {
 
 //Home Page News Feed (main) Options
 function sponsoredAdsHomePage() {
-    const xPath_feed = "//a[contains(@href, '/ads/about')]/ancestor::div[contains(@class, 'x1lliihq')]"
+    const xPath_feed = "//a[contains(@href, '/ads/about')]/ancestor::div[contains(@class, 'x1lliihq')][2]"
     //split the right rail into a seperate function    
     const xPath_right_rail = "//span[text() = 'Sponsored']/ancestor::div[8]"
     htmlChopper(xPath_feed)
@@ -212,7 +236,7 @@ function sponsoredAdsHomePage() {
 }
 
 function pumkHomePage() {
-  const xPath = "//span[text() = 'People you may know']/ancestor::div[20]"
+  const xPath = "//span[text() = 'People you may know']/ancestor::div[contains(@class, 'x1lliihq')]"
   htmlChopper(xPath)
 }
 
@@ -397,15 +421,11 @@ function feedsSideBar() {
   htmlChopper(xPath)  
 }
 
-/*deprecated as this searches from the top and breaks the whole sidebar
-function yourProfileHomePage() {
-  const left_sidebar_xpath = "//div[contains(@aria-label, 'Shortcuts')]/descendant::li[1]"
-  const left_sidebar_html = document.evaluate(left_sidebar_xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-  if (left_sidebar_html != null) {
-    left_sidebar_html.remove()
-  } 
+//Friends Page
+function pumkFriendsPage() {
+    const xPath = "//span[text() = 'People you may know']/ancestor::div[9]"
+    htmlChopper(xPath)  
 }
-*/
 
 //Groups Feed options
 function suggestedPostsGroupsPage() {
