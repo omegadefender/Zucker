@@ -26,11 +26,9 @@ chrome.storage.sync.get(function(options) {
 function onRemoved() {
   console.log("Zucker Ext - Defunct options removed");
 }
-
 function onError(e) {
   console.log(e);
 }
-
 const defunctOptions = ["sponsoredAdHomePage", "metaQuestHomePage", "videoSiteWide", "gamingSiteWide", "adsManagerHomePage", "autoClickSeeMoreHomePage", "birthdaysHomePage", 
   "bloodDonationsHomePage", "climateScienceCentreHomePage", "eventsHomePage", "feedsHomePage", "findFriendsHomePage", "fundraisersHomePage", "gamingVideoHomePage", "groupsHomePage",
   "marketplaceHomePage", "memoriesHomePage", "messengerHomePage", "messengerKidsHomePage", "metaQuest3SHomePage", "ordersPaymentsHomePage", "pagesHomePage", "paidPartnershipHomePage",
@@ -44,7 +42,6 @@ function urlChopper(url) {
   const newurl = url.replace(str, '')
   return newurl
 }
-
 function htmlChopper(xPath) {
   const element = document.evaluate(xPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
   if (element != null) {
@@ -52,11 +49,7 @@ function htmlChopper(xPath) {
   }  
 }
 const first_URL = urlChopper(window.location.href)
-const config = { childList: true, subtree: true }
-let main_page_node = null
-let sidebar_node = null
-let friends_page_node = null
-
+/*
 window.addEventListener("load", () => {
   banner_options.forEach((option) => {
     option()       
@@ -118,7 +111,44 @@ window.navigation.addEventListener("navigate", (event) => {
 
   }
 });
+*/
+let debounceTimer = null
+const observer = new MutationObserver(() => {
+  clearTimeout(debounceTimer)
+  debounceTimer = setTimeout(() => {
+    const url = urlChopper(window.location.href)
+    //banner_options.forEach(option => option())
+    if (url === "") {
+      home_page_options.forEach(option => option())
+      sidebar_options.forEach(option => option())
+    } else if (url === "friends") {
+      friends_page_options.forEach(option => option())
+    } else if (url === "groups/feed/" || url === "groups/feed/#") {
+      group_page_options.forEach(option => option())
+    }
+  }, 250)
+})
 
+observer.observe(document.body, { childList: true, subtree: true })
+
+window.navigation.addEventListener("navigate", (event) => {
+  const new_url = urlChopper(event.destination.url)
+  setTimeout(() => {
+    // one-shot pass after giving React time to render
+    if (new_url === "") {
+      home_page_options.forEach(option => option())
+      sidebar_options.forEach(option => option())
+    } else if (new_url === "friends") {
+      friends_page_options.forEach(option => option())
+    }
+  }, 500)
+})
+
+/*
+const config = { childList: true, subtree: true }
+let main_page_node = null
+let sidebar_node = null
+let friends_page_node = null
 let main_page_observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     mutation.addedNodes.forEach((node) => {
@@ -160,7 +190,7 @@ function reelsBanner() {
   const xPath = "//a[contains(@aria-label, 'Reels')]/ancestor::li"
   htmlChopper(xPath)  
 }
-
+*/
 //SiteWide options
 function sponsoredAdsSiteWide(url) {
   if (url.includes('?filter=all&sk=h_chr')){
