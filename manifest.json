@@ -19,5 +19,5 @@
   "permissions": [
     "storage"
   ],
-  "description": "Zucker is an extension that hides facebook features."
+  "description": "Zucker is a chrome extension that blocks ads and facebook features."
 }

@@ -163,7 +163,7 @@ function restore_options() {
     document.getElementById('reelsBanner').checked = items.reelsBanner
     //Hompage - news feed options
     document.getElementById('sponsoredAdsSiteWide').checked = items.sponsoredAdsHomePage
-    document.getElementById('pumkSiteWide').checked = items.pumkHomePage
+    document.getElementById('pumkSiteWide').checked = items.pumkHomePage || items.pumkFriendsPage
     document.getElementById('joinHomePage').checked = items.joinHomePage
     document.getElementById('storiesHomePage').checked = items.storiesHomePage
     document.getElementById('reelsAndShortVideosHomePage').checked = items.reelsAndShortVideosHomePage        
@@ -201,8 +201,6 @@ function restore_options() {
     document.getElementById('birthdaysSideBar').checked = items.birthdaysSideBar
     document.getElementById('reelsSideBar').checked = items.reelsSideBar 
     document.getElementById('feedsSideBar').checked = items.feedsSideBar
-    //Friends Page
-    document.getElementById('pumkSiteWide').checked = items.pumkFriendsPage
     //Groups Page
     document.getElementById('suggestedPostsGroupsPage').checked = items.suggestedPostsGroupsPage
     document.getElementById('suggestedForYouGroupsPage').checked = items.suggestedForYouGroupsPage
