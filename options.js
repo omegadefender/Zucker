@@ -18,6 +18,7 @@ function save_options() {
   const andHomePage = document.getElementById('andHomePage').checked  
   const albumHomePage = document.getElementById('albumHomePage').checked
   const addedANewPhotoToTheAlbumHomePage = document.getElementById('addedANewPhotoToTheAlbumHomePage').checked
+  const metaAIHomePage = document.getElementById('metaAIHomePage').checked
   //Side bar options on the Home page (navigation) 
   const autoClickSeeMoreSideBar = document.getElementById('autoClickSeeMoreSideBar').checked
   const removeSeeLessSideBar = document.getElementById('removeSeeLessSideBar').checked
@@ -43,6 +44,7 @@ function save_options() {
   const birthdaysSideBar = document.getElementById('birthdaysSideBar').checked
   const reelsSideBar = document.getElementById('reelsSideBar').checked
   const feedsSideBar = document.getElementById('feedsSideBar').checked
+  const metaAISideBar = document.getElementById('metaAISideBar').checked
   //Friends Page
   const pumkFriendsPage = document.getElementById('pumkSiteWide').checked
   //Groups Page
@@ -68,6 +70,7 @@ function save_options() {
     andHomePage: andHomePage,
     albumHomePage: albumHomePage,
     addedANewPhotoToTheAlbumHomePage: addedANewPhotoToTheAlbumHomePage,
+    metaAIHomePage: metaAIHomePage,
     //Side bar options on the Home page (navigation) 
     autoClickSeeMoreSideBar: autoClickSeeMoreSideBar,
     removeSeeLessSideBar: removeSeeLessSideBar,
@@ -93,6 +96,7 @@ function save_options() {
     birthdaysSideBar: birthdaysSideBar,
     reelsSideBar: reelsSideBar,
     feedsSideBar: feedsSideBar,
+    metaAISideBar: metaAISideBar,
     //Friends Page
     pumkFriendsPage: pumkFriendsPage,
     //Groups Page
@@ -127,6 +131,7 @@ function restore_options() {
     andHomePage: false,
     albumHomePage: false,
     addedANewPhotoToTheAlbumHomePage: false,
+    metaAIHomePage: false,
     //Side bar options on the Home page (navigation)     
     autoClickSeeMoreSideBar: false,
     removeSeeLessSideBar: false,
@@ -152,6 +157,7 @@ function restore_options() {
     birthdaysSideBar: false,
     reelsSideBar: false,
     feedsSideBar: false,
+    metaAISideBar: false,
     //Friends Page
     pumkFriendsPage: false,
     //Groups Page
@@ -176,6 +182,7 @@ function restore_options() {
     document.getElementById('andHomePage').checked = items.andHomePage
     document.getElementById('albumHomePage').checked = items.albumHomePage
     document.getElementById('addedANewPhotoToTheAlbumHomePage').checked = items.addedANewPhotoToTheAlbumHomePage
+    document.getElementById('metaAIHomePage').checked = items.metaAIHomePage
     //Side bar options on the Home page (navigation) 
     document.getElementById('autoClickSeeMoreSideBar').checked = items.autoClickSeeMoreSideBar
     document.getElementById('removeSeeLessSideBar').checked = items.removeSeeLessSideBar
@@ -201,6 +208,7 @@ function restore_options() {
     document.getElementById('birthdaysSideBar').checked = items.birthdaysSideBar
     document.getElementById('reelsSideBar').checked = items.reelsSideBar 
     document.getElementById('feedsSideBar').checked = items.feedsSideBar
+    document.getElementById('metaAISideBar').checked = items.metaAISideBar
     //Groups Page
     document.getElementById('suggestedPostsGroupsPage').checked = items.suggestedPostsGroupsPage
     document.getElementById('suggestedForYouGroupsPage').checked = items.suggestedForYouGroupsPage

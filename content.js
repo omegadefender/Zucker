@@ -31,8 +31,7 @@ function onError(e) {
 }
 const defunctOptions = ["sponsoredAdHomePage", "metaQuestHomePage", "videoSiteWide", "gamingSiteWide", "adsManagerHomePage", "autoClickSeeMoreHomePage", "birthdaysHomePage", 
   "bloodDonationsHomePage", "climateScienceCentreHomePage", "eventsHomePage", "feedsHomePage", "findFriendsHomePage", "fundraisersHomePage", "gamingVideoHomePage", "groupsHomePage",
-  "marketplaceHomePage", "memoriesHomePage", "messengerHomePage", "messengerKidsHomePage", "metaQuest3SHomePage", "ordersPaymentsHomePage", "pagesHomePage", "paidPartnershipHomePage",
-  "playGamesHomePage", "recentAdActivityHomePage", "reelsHomePage", "removeSeeLessHomePage", "savedHomePage", "videoHomePage"]
+  "marketplaceHomePage", "memoriesHomePage", "messengerHomePage", "messengerKidsHomePage", "metaQuest3SHomePage", "ordersPaymentsHomePage", "pagesHomePage", "playGamesHomePage", "recentAdActivityHomePage", "reelsHomePage", "removeSeeLessHomePage", "savedHomePage", "videoHomePage"]
 const removeDefunctOptions = chrome.storage.sync.remove(defunctOptions);
 removeDefunctOptions.then(onRemoved, onError);
 
@@ -48,76 +47,13 @@ function htmlChopper(xPath) {
     element.remove()
   }  
 }
-const first_URL = urlChopper(window.location.href)
-/*
-window.addEventListener("load", () => {
-  banner_options.forEach((option) => {
-    option()       
-  });
-  if (first_URL === "") {
-    let main_page_node = document.querySelector("[role='main']")
-    let sidebar_node = document.querySelector("[role='navigation']")
-    home_page_options.forEach((option) => {
-      option();
-    });
-    sidebar_options.forEach((option) => {
-      option();
-    });
-    main_page_observer.observe(main_page_node, config);
-    sidebar_observer.observe(sidebar_node, config);
-  } else if (first_URL === "friends") {
-      let friends_page_node = document.body
-      friends_page_options.forEach((option) => {
-        option();
-      });
-      friends_page_observer.observe(friends_page_node, config);
-  } else if (first_URL === "marketplace" || first_URL === "marketplace/?ref=app_tab") {
 
-  } else if (first_URL === "groups/feed/" || first_URL === "groups/feed/#") {
-
-  } else if (first_URL === "?filter=all&sk=h_chr") {
-
-  }
-});
-
-window.navigation.addEventListener("navigate", (event) => {
-  const new_url = urlChopper(event.destination.url)
-  console.log("new URL is ", new_url)
-  main_page_observer.disconnect();
-  sidebar_observer.disconnect();
-  friends_page_observer.disconnect();
-  if (new_url === "") {
-    let main_page_node = document.querySelector("[role='main']")
-    let sidebar_node = document.querySelector("[role='navigation']")
-    home_page_options.forEach((option) => {
-      option();
-    });
-    sidebar_options.forEach((option) => {
-      option();
-    });
-    main_page_observer.observe(main_page_node, config);
-    sidebar_observer.observe(sidebar_node, config);
-  } else if (new_url === "friends") {
-      let friends_page_node = document.body
-      friends_page_options.forEach((option) => {
-        option();
-      });
-      friends_page_observer.observe(friends_page_node, config);
-  } else if (new_url === "marketplace" || new_url === "marketplace/?ref=app_tab") {
-
-  } else if (new_url === "groups/feed/" || new_url === "groups/feed/#") {
-
-  } else if (new_url === "?filter=all&sk=h_chr") {
-
-  }
-});
-*/
 let debounceTimer = null
 const observer = new MutationObserver(() => {
   clearTimeout(debounceTimer)
   debounceTimer = setTimeout(() => {
     const url = urlChopper(window.location.href)
-    //banner_options.forEach(option => option())
+    banner_options.forEach(option => option())
     if (url === "") {
       home_page_options.forEach(option => option())
       sidebar_options.forEach(option => option())
@@ -125,72 +61,19 @@ const observer = new MutationObserver(() => {
       friends_page_options.forEach(option => option())
     } else if (url === "groups/feed/" || url === "groups/feed/#") {
       group_page_options.forEach(option => option())
-    }
-  }, 250)
-})
+    } else if (url == "?filter=all&sk=h_chr") {
 
+    }
+  }, 150)
+})
 observer.observe(document.body, { childList: true, subtree: true })
-
-window.navigation.addEventListener("navigate", (event) => {
-  const new_url = urlChopper(event.destination.url)
-  setTimeout(() => {
-    // one-shot pass after giving React time to render
-    if (new_url === "") {
-      home_page_options.forEach(option => option())
-      sidebar_options.forEach(option => option())
-    } else if (new_url === "friends") {
-      friends_page_options.forEach(option => option())
-    }
-  }, 500)
-})
-
-/*
-const config = { childList: true, subtree: true }
-let main_page_node = null
-let sidebar_node = null
-let friends_page_node = null
-let main_page_observer = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    mutation.addedNodes.forEach((node) => {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        home_page_options.forEach((option) => {
-          option();
-        });
-      };
-    });
-  });
-});
-
-let sidebar_observer = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    mutation.addedNodes.forEach((node) => {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        sidebar_options.forEach((option) => {
-          option();
-        });
-      };
-    });
-  });
-});
-
-let friends_page_observer = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    mutation.addedNodes.forEach((node) => {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        friends_page_options.forEach((option) => {
-          option();
-        });
-      }
-    });
-  });
-});
 
 //Banner options
 function reelsBanner() {
   const xPath = "//a[contains(@aria-label, 'Reels')]/ancestor::li"
   htmlChopper(xPath)  
 }
-*/
+
 //SiteWide options
 function sponsoredAdsSiteWide(url) {
   if (url.includes('?filter=all&sk=h_chr')){
@@ -227,8 +110,7 @@ function pumkSiteWide(url) {
 
 //Home Page News Feed (main) Options
 function sponsoredAdsHomePage() {
-  const xPath_feed = "//a[contains(@href, '/ads/about')]/ancestor::div[contains(@class, 'x1lliihq')][2]"
-  //split the right rail into a seperate function    
+  const xPath_feed = "//a[contains(@href, '/ads/about')]/ancestor::div[contains(@class, 'x1lliihq')][2]"   
   const xPath_right_rail = "//span[text() = 'Sponsored']/ancestor::div[8]"
   htmlChopper(xPath_feed)
   htmlChopper(xPath_right_rail)
@@ -297,7 +179,12 @@ function albumHomePage() {
 function addedANewPhotoToTheAlbumHomePage() {
   const xPath = "//span[text() = ' added a new photo to the album ']/ancestor::div[contains(@class, 'x1lliihq')]"
   htmlChopper(xPath)
-} 
+}
+
+function metaAIHomePage() {
+  const xPath = "//div[@role='complementary']//span[text()='Meta AI']/ancestor::li[1]"
+  htmlChopper(xPath)
+}
 
 //Side bar options on the Home page (navigation) 
 function autoClickSeeMoreSideBar() {
@@ -418,6 +305,11 @@ function reelsSideBar() {
 function feedsSideBar() {
   const xPath = "//span[text() = 'Feeds']/ancestor::li"
   htmlChopper(xPath)  
+}
+
+function metaAISideBar() {
+  const xPath = "//div[@aria-label='Shortcuts']//span[text()='Meta AI']/ancestor::li[1]"
+  htmlChopper(xPath)
 }
 
 //Friends Page

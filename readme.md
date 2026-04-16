@@ -9,6 +9,7 @@ Please log feature requests, or bug reports on the [Github Repo](https://github.
 ### 0.0.2.5 Update
 
 - Added options to hide "Reels" from the top banner/nav menu
+- Added option to remove "Meta AI" from the left hand sidebar on the main page
 - Removed redundant options "Video" and "Gaming" as these are no longer in the top banner/nav menu
 - Code improvements to javascript to allow for better performance
 
