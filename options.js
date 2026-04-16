@@ -45,6 +45,7 @@ function save_options() {
   const reelsSideBar = document.getElementById('reelsSideBar').checked
   const feedsSideBar = document.getElementById('feedsSideBar').checked
   const metaAISideBar = document.getElementById('metaAISideBar').checked
+  const friendsSideBar = document.getElementById('friendsSideBar').checked
   //Friends Page
   const pumkFriendsPage = document.getElementById('pumkSiteWide').checked
   //Groups Page
@@ -97,6 +98,7 @@ function save_options() {
     reelsSideBar: reelsSideBar,
     feedsSideBar: feedsSideBar,
     metaAISideBar: metaAISideBar,
+    friendsSideBar: friendsSideBar,
     //Friends Page
     pumkFriendsPage: pumkFriendsPage,
     //Groups Page
@@ -158,6 +160,7 @@ function restore_options() {
     reelsSideBar: false,
     feedsSideBar: false,
     metaAISideBar: false,
+    friendsSideBar: false,
     //Friends Page
     pumkFriendsPage: false,
     //Groups Page
@@ -209,6 +212,7 @@ function restore_options() {
     document.getElementById('reelsSideBar').checked = items.reelsSideBar 
     document.getElementById('feedsSideBar').checked = items.feedsSideBar
     document.getElementById('metaAISideBar').checked = items.metaAISideBar
+    document.getElementById('friendsSideBar').checked = items.friendsSideBar
     //Groups Page
     document.getElementById('suggestedPostsGroupsPage').checked = items.suggestedPostsGroupsPage
     document.getElementById('suggestedForYouGroupsPage').checked = items.suggestedForYouGroupsPage

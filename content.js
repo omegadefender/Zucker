@@ -64,7 +64,7 @@ const observer = new MutationObserver(() => {
     } else if (url == "?filter=all&sk=h_chr") {
 
     }
-  }, 150)
+  }, 100)
 })
 observer.observe(document.body, { childList: true, subtree: true })
 
@@ -309,6 +309,11 @@ function feedsSideBar() {
 
 function metaAISideBar() {
   const xPath = "//div[@aria-label='Shortcuts']//span[text()='Meta AI']/ancestor::li[1]"
+  htmlChopper(xPath)
+}
+
+function friendsSideBar() {
+  const xPath = "//div[@aria-label='Shortcuts']//span[text()='Friends']/ancestor::li[1]"
   htmlChopper(xPath)
 }
 
