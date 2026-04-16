@@ -10,9 +10,9 @@ Zucker for Facebook is a Chrome browser extension that allows users to hide unwa
 
 Zucker does not collect, transmit, or share any personal data. No information about you, your browsing activity, or your Facebook usage is sent to any external server or third party.
 
-## Local Storage
+## Settings Storage
 
-Zucker uses Chrome's built-in storage API (`chrome.storage`) solely to save your preferences and toggle settings (e.g. which elements you have chosen to hide). This data never leaves your device.
+Zucker uses Chrome's built-in sync storage API (`chrome.storage.sync`) solely to save your preferences and toggle settings (e.g. which elements you have chosen to hide). If you are signed into Chrome, these settings may be synced across your devices via Google's Chrome sync infrastructure. This data is managed entirely by Google and is not collected, accessed, or transmitted by this extension.
 
 ## Permissions
 
