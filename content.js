@@ -4,6 +4,7 @@ const home_page_options = [];
 const sidebar_options = [];
 const friends_page_options = [];
 const group_page_options = [];
+const profile_page_options = [];
 
 chrome.storage.sync.get(function(options) {
   for (const [key, value] of Object.entries(options)) {
@@ -18,6 +19,8 @@ chrome.storage.sync.get(function(options) {
         friends_page_options.push(this[key])
       } else if (key.includes("GroupsPage")) {
         group_page_options.push(this[key])
+      } else if (key.includes("ProfilePage")) {
+        profile_page_options.push(this[key])
       }
     }
   }    
@@ -62,7 +65,9 @@ const observer = new MutationObserver(() => {
     } else if (url === "groups/feed/" || url === "groups/feed/#") {
       group_page_options.forEach(option => option())
     } else if (url == "?filter=all&sk=h_chr") {
-
+      //feeds
+    } else {
+      profile_page_options.forEach(option => option())
     }
   }, 100)
 })
@@ -96,16 +101,6 @@ function sponsoredAdsSiteWide(url) {
         }
       }))
     }
-}
-
-function pumkSiteWide(url) {  
-  let xpath = ""
-  let html = null
-  xpath = "//span[text() = 'People you may know']/ancestor::div[7]"
-  html = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-  if (html != null) {
-    html.remove()
-  }    
 }
 
 //Home Page News Feed (main) Options
@@ -346,4 +341,10 @@ function friendsGroupsGroupsPage() {
   if (html != null) {
     html.remove()
   }
+}
+
+//Profile Page
+function pumkProfilePage() {
+    const xPath = "//span[text() = 'People you may know']/ancestor::div[7]"
+    htmlChopper(xPath)  
 }
