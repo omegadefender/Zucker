@@ -137,8 +137,30 @@ function suggestedForYouHomePage() {
 }
 
 function followHomePage() {
-  const xPath = "//span[text() = 'Follow']/ancestor::div[24]"
-  htmlChopper(xPath)
+  const spans = document.evaluate("//span[text() = 'Follow']", document, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null)
+  let span = spans.iterateNext()
+  while (span) {
+    let isComment = false
+    let el = span
+    while (el) {
+      if (el.getAttribute && el.getAttribute('aria-label') && el.getAttribute('aria-label').startsWith('Comment by')) {
+        isComment = true
+        break
+      }
+      el = el.parentElement
+    }
+    if (!isComment) {
+      let ancestor = span
+      let divCount = 0
+      while (ancestor && divCount < 24) {
+        ancestor = ancestor.parentElement
+        if (ancestor && ancestor.tagName === 'DIV') divCount++
+      }
+      if (ancestor) ancestor.remove()
+      return
+    }
+    span = spans.iterateNext()
+  }
 }
 
 function paidPartnershipHomePage() {
@@ -318,6 +340,12 @@ function pumkFriendsPage() {
     htmlChopper(xPath)  
 }
 
+//Profile Page
+function pumkProfilePage() {
+    const xPath = "//span[text() = 'People you may know']/ancestor::div[7]"
+    htmlChopper(xPath)  
+}
+
 //Groups Feed options
 function suggestedPostsGroupsPage() {
   const xPath = "//span[text() = 'Suggested post from a public group']/ancestor::div[19]"
@@ -341,10 +369,4 @@ function friendsGroupsGroupsPage() {
   if (html != null) {
     html.remove()
   }
-}
-
-//Profile Page
-function pumkProfilePage() {
-    const xPath = "//span[text() = 'People you may know']/ancestor::div[7]"
-    htmlChopper(xPath)  
 }

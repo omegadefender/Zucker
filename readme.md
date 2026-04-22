@@ -6,6 +6,11 @@ The only data that this extension uses are the options you select.
 
 Please log feature requests, or bug reports on the [Github Repo](https://github.com/omegadefender/Zucker/issues)
 
+### 0.0.2.6 Update
+
+- Changed badge icons
+- Restored Pumk option hiding pumk from a person's profile
+
 ### 0.0.2.5 Update
 
 - Added options to hide "Reels" from the top banner/nav menu

@@ -166,6 +166,7 @@ function restore_options() {
     friendsSideBar: false,
     //Friends Page
     pumkFriendsPage: false,
+    //profile page
     pumkProfilePage: false,
     //Groups Page
     suggestedPostsGroupsPage: false,
