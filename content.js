@@ -62,7 +62,7 @@ const observer = new MutationObserver(() => {
       sidebar_options.forEach(option => option())
     } else if (url === "friends") {
       friends_page_options.forEach(option => option())
-    } else if (url === "groups/feed/" || url === "groups/feed/#") {
+    } else if (url.startsWith("groups/feed")) {
       group_page_options.forEach(option => option())
     } else if (url == "?filter=all&sk=h_chr") {
       //feeds
@@ -81,6 +81,7 @@ function reelsBanner() {
 
 //SiteWide options
 function sponsoredAdsSiteWide(url) {
+  //for the feeds page and for the market place. Market place seems to not show sponsored content anymore
   if (url.includes('?filter=all&sk=h_chr')){
     //Feeds
     const xPath = "//div[contains(@class, 'sponsored_ad')]/ancestor::div[contains(@class, 'x1lliihq')]"
@@ -364,7 +365,7 @@ function suggestedForYouGroupsPage() {
 }
 
 function friendsGroupsGroupsPage() {
-  const xPath = "//span[text() = \"Friends' groups\"]/ancestor::div[]"
+  const xPath = '//span[text() = "Friends\' groups"]/ancestor::div'
   const html = document.evaluate(xPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
   if (html != null) {
     html.remove()

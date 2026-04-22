@@ -10,6 +10,8 @@ Please log feature requests, or bug reports on the [Github Repo](https://github.
 
 - Changed badge icons
 - Restored Pumk option hiding pumk from a person's profile
+- Fixed bug where "Follow" post blocking would hide comment sections when a commenter had "Follow" next to their profile name
+- Fixed bug on groups feed page that prevented Hide "Suggested post from a public group" from working
 
 ### 0.0.2.5 Update
 
