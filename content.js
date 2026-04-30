@@ -5,6 +5,7 @@ const sidebar_options = [];
 const friends_page_options = [];
 const profile_page_options = [];
 const marketplace_options = [];
+const feeds_page_options = [];
 const group_page_options = [];
 
 
@@ -23,6 +24,8 @@ chrome.storage.sync.get(function(options) {
         group_page_options.push(this[key])
       } else if (key.includes("ProfilePage")) {
         profile_page_options.push(this[key])
+      } else if (key.includes("FeedsPage")) {
+        feeds_page_options.push(this[key])
       } else if (key.includes("Marketplace")) {
         marketplace_options.push(this[key])
       }
@@ -69,7 +72,7 @@ const observer = new MutationObserver(() => {
     } else if (url.startsWith("groups/feed")) {
       group_page_options.forEach(option => option())
     } else if (url == "?filter=all&sk=h_chr") {
-      //feeds
+      feeds_page_options.forEach(option => option())
     } if (url.includes('marketplace')) {
       marketplace_options.forEach(option => option())
     } else {
@@ -83,15 +86,6 @@ observer.observe(document.body, { childList: true, subtree: true })
 function reelsBanner() {
   const xPath = "//a[contains(@aria-label, 'Reels')]/ancestor::li"
   htmlChopper(xPath)  
-}
-
-//SiteWide options
-function sponsoredAdsSiteWide(url) {
-  if (url.includes('?filter=all&sk=h_chr')){
-    //Feeds
-    const xPath = "//div[contains(@class, 'sponsored_ad')]/ancestor::div[contains(@class, 'x1lliihq')]"
-    htmlChopper(xPath) 
-  }
 }
 
 //Home Page News Feed (main) Options
@@ -344,6 +338,12 @@ function sponsoredAdsMarketplace() {
   for (let i = 0; i < result.snapshotLength; i++) {
     result.snapshotItem(i).remove();
   }
+}
+
+//Feeds Page
+function sponsoredAdsFeedsPage() {
+  const xPath = "//div[contains(@class, 'sponsored_ad')]/ancestor::div[contains(@class, 'x1lliihq')]"
+  htmlChopper(xPath) 
 }
 
 //Groups Feed options

@@ -52,6 +52,8 @@ function save_options() {
   const pumkProfilePage = document.getElementById('pumkSiteWide').checked
   //Marketplace Page
   const sponsoredAdsMarketplace = document.getElementById('sponsoredAdsSiteWide').checked
+  //Feeds Page
+  const sponsoredAdsFeedsPage = document.getElementById('sponsoredAdsSiteWide').checked
   //Groups Page
   const suggestedPostsGroupsPage = document.getElementById('suggestedPostsGroupsPage').checked
   const suggestedForYouGroupsPage = document.getElementById('suggestedForYouGroupsPage').checked
@@ -108,6 +110,8 @@ function save_options() {
     pumkProfilePage: pumkProfilePage,
     //Marketplace Page
     sponsoredAdsMarketplace: sponsoredAdsMarketplace,
+    //Feeds Page
+    sponsoredAdsFeedsPage: sponsoredAdsFeedsPage,
     //Groups Page
     suggestedPostsGroupsPage: suggestedPostsGroupsPage,
     suggestedForYouGroupsPage: suggestedForYouGroupsPage,
@@ -174,6 +178,7 @@ function restore_options() {
     pumkProfilePage: false,
     //Marketplace page
     sponsoredAdsMarketplace: true,
+    sponsoredAdsFeedsPage: true,
     //Groups Page
     suggestedPostsGroupsPage: false,
     suggestedForYouGroupsPage: false,
@@ -182,7 +187,7 @@ function restore_options() {
     //banner options
     document.getElementById('reelsBanner').checked = items.reelsBanner
     //Hompage - news feed options
-    document.getElementById('sponsoredAdsSiteWide').checked = items.sponsoredAdsHomePage || items.sponsoredAdsMarketplace
+    document.getElementById('sponsoredAdsSiteWide').checked = items.sponsoredAdsHomePage || items.sponsoredAdsMarketplace || items.sponsoredAdsFeedsPage
     document.getElementById('pumkSiteWide').checked = items.pumkHomePage || items.pumkFriendsPage || items.pumkProfilePage 
     document.getElementById('joinHomePage').checked = items.joinHomePage
     document.getElementById('storiesHomePage').checked = items.storiesHomePage
