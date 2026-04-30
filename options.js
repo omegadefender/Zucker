@@ -50,6 +50,8 @@ function save_options() {
   const pumkFriendsPage = document.getElementById('pumkSiteWide').checked
   //Profile Page
   const pumkProfilePage = document.getElementById('pumkSiteWide').checked
+  //Marketplace Page
+  const sponsoredAdsMarketplace = document.getElementById('sponsoredAdsSiteWide').checked
   //Groups Page
   const suggestedPostsGroupsPage = document.getElementById('suggestedPostsGroupsPage').checked
   const suggestedForYouGroupsPage = document.getElementById('suggestedForYouGroupsPage').checked
@@ -104,6 +106,8 @@ function save_options() {
     //Friends Page
     pumkFriendsPage: pumkFriendsPage,
     pumkProfilePage: pumkProfilePage,
+    //Marketplace Page
+    sponsoredAdsMarketplace: sponsoredAdsMarketplace,
     //Groups Page
     suggestedPostsGroupsPage: suggestedPostsGroupsPage,
     suggestedForYouGroupsPage: suggestedForYouGroupsPage,
@@ -168,6 +172,8 @@ function restore_options() {
     pumkFriendsPage: false,
     //profile page
     pumkProfilePage: false,
+    //Marketplace page
+    sponsoredAdsMarketplace: true,
     //Groups Page
     suggestedPostsGroupsPage: false,
     suggestedForYouGroupsPage: false,
@@ -176,8 +182,8 @@ function restore_options() {
     //banner options
     document.getElementById('reelsBanner').checked = items.reelsBanner
     //Hompage - news feed options
-    document.getElementById('sponsoredAdsSiteWide').checked = items.sponsoredAdsHomePage
-    document.getElementById('pumkSiteWide').checked = items.pumkHomePage || items.pumkFriendsPage || items.pumkProfilePage
+    document.getElementById('sponsoredAdsSiteWide').checked = items.sponsoredAdsHomePage || items.sponsoredAdsMarketplace
+    document.getElementById('pumkSiteWide').checked = items.pumkHomePage || items.pumkFriendsPage || items.pumkProfilePage 
     document.getElementById('joinHomePage').checked = items.joinHomePage
     document.getElementById('storiesHomePage').checked = items.storiesHomePage
     document.getElementById('reelsAndShortVideosHomePage').checked = items.reelsAndShortVideosHomePage        

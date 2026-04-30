@@ -3,8 +3,10 @@ const banner_options = [];
 const home_page_options = [];
 const sidebar_options = [];
 const friends_page_options = [];
-const group_page_options = [];
 const profile_page_options = [];
+const marketplace_options = [];
+const group_page_options = [];
+
 
 chrome.storage.sync.get(function(options) {
   for (const [key, value] of Object.entries(options)) {
@@ -21,6 +23,8 @@ chrome.storage.sync.get(function(options) {
         group_page_options.push(this[key])
       } else if (key.includes("ProfilePage")) {
         profile_page_options.push(this[key])
+      } else if (key.includes("Marketplace")) {
+        marketplace_options.push(this[key])
       }
     }
   }    
@@ -66,6 +70,8 @@ const observer = new MutationObserver(() => {
       group_page_options.forEach(option => option())
     } else if (url == "?filter=all&sk=h_chr") {
       //feeds
+    } if (url.includes('marketplace')) {
+      marketplace_options.forEach(option => option())
     } else {
       profile_page_options.forEach(option => option())
     }
@@ -81,27 +87,11 @@ function reelsBanner() {
 
 //SiteWide options
 function sponsoredAdsSiteWide(url) {
-  //for the feeds page and for the market place. Market place seems to not show sponsored content anymore
   if (url.includes('?filter=all&sk=h_chr')){
     //Feeds
     const xPath = "//div[contains(@class, 'sponsored_ad')]/ancestor::div[contains(@class, 'x1lliihq')]"
     htmlChopper(xPath) 
-  } else if (url.includes('marketplace')) {
-      //marketplace
-      const marketplace_items = document.querySelector('div[aria-label="Collection of Marketplace items"]') 
-      let browse_feed_array = []
-      browse_feed_array = marketplace_items.querySelectorAll('div[class=""]')
-      browse_feed_array.forEach((upsell_feed => {
-        const xpath_text = ".//a[contains(@href, '/ads/about/?entry_product=ad_preferences')]/ancestor::div[1]"
-        const xpath_image = ".//a[contains(@href, '/ads/about/?entry_product=ad_preferences')]/ancestor::div[5]/div[2]/div"
-        const html_text = document.evaluate(xpath_text, upsell_feed, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-        const html_image = document.evaluate(xpath_image, upsell_feed, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
-        if (html_text != null) {
-          html_text.remove()
-          html_image.remove()
-        }
-      }))
-    }
+  }
 }
 
 //Home Page News Feed (main) Options
@@ -345,6 +335,15 @@ function pumkFriendsPage() {
 function pumkProfilePage() {
     const xPath = "//span[text() = 'People you may know']/ancestor::div[7]"
     htmlChopper(xPath)  
+}
+
+//Marketplace
+function sponsoredAdsMarketplace() {
+  const xPath = ".//div[text() = 'Sponsored']/ancestor::div[7]"
+  const result = document.evaluate(xPath, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+  for (let i = 0; i < result.snapshotLength; i++) {
+    result.snapshotItem(i).remove();
+  }
 }
 
 //Groups Feed options
