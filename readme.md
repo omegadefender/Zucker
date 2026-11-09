@@ -6,6 +6,9 @@ The only data that this extension uses are the options you select.
 
 Please log feature requests, or bug reports on the [Github Repo](https://github.com/omegadefender/Zucker/issues)
 
+### 0.0.2.8 Update
+- Fixed Home Feed breaking
+
 ### 0.0.2.7 Update
 
 - Sponsored Ads are being removed from the marketplace again
