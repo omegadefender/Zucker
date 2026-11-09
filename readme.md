@@ -8,6 +8,7 @@ Please log feature requests, or bug reports on the [Github Repo](https://github.
 
 ### 0.0.2.8 Update
 - Fixed Home Feed breaking.
+- Added an alert when extension is updated
 
 ### 0.0.2.7 Update
 
