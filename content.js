@@ -58,6 +58,27 @@ function htmlChopper(xPath) {
   }  
 }
 
+//Hiding instead of removing, because deleting elements React owns crashes the Facebook feed.
+//Rules use NOT_HIDDEN so that text inside an already hidden element can't match again.
+const HIDDEN_ATTR = "data-zucker-hidden"
+const NOT_HIDDEN = `[not(ancestor-or-self::*[@${HIDDEN_ATTR}])]`
+function hideElement(element) {
+  element.style.setProperty("display", "none", "important")
+  element.setAttribute(HIDDEN_ATTR, "")
+}
+function findFirst(xPath) {
+  return document.evaluate(xPath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+}
+//Hiding doesn't trigger the observer, so every match has to be hidden in one pass.
+//The attribute check stops the loop if a rule's match never changes.
+function htmlHider(xPath) {
+  let element = findFirst(xPath)
+  while (element && !element.hasAttribute(HIDDEN_ATTR)) {
+    hideElement(element)
+    element = findFirst(xPath)
+  }
+}
+
 let debounceTimer = null
 const observer = new MutationObserver(() => {
   clearTimeout(debounceTimer)
@@ -84,47 +105,50 @@ observer.observe(document.body, { childList: true, subtree: true })
 
 //Banner options
 function reelsBanner() {
-  const xPath = "//a[contains(@aria-label, 'Reels')]/ancestor::li"
-  htmlChopper(xPath)  
+  const xPath = `//a[contains(@aria-label, 'Reels')]${NOT_HIDDEN}/ancestor::li`
+  htmlHider(xPath)  
 }
 
 //Home Page News Feed (main) Options
 function sponsoredAdsHomePage() {
-  const xPath_feed = "//a[contains(@href, '/ads/about')]/ancestor::div[contains(@class, 'x1lliihq')][2]"   
-  const xPath_right_rail = "//span[text() = 'Sponsored']/ancestor::div[8]"
-  htmlChopper(xPath_feed)
-  htmlChopper(xPath_right_rail)
+  const xPath_feed = `//a[contains(@href, '/ads/about')]${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')][2]/descendant::div[1]${NOT_HIDDEN}`   
+  const xPath_right_rail = `//span[text() = 'Sponsored']${NOT_HIDDEN}/ancestor::div[8]`
+  htmlHider(xPath_feed)
+  htmlHider(xPath_right_rail)
 }
 
 function pumkHomePage() {
-  const xPath = "//span[text() = 'People you may know']/ancestor::div[contains(@class, 'x1lliihq')]"
-  htmlChopper(xPath)
+  const xPath = `//span[text() = 'People you may know']${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')]`
+  htmlHider(xPath)
 }
 
 function joinHomePage() {
-  const xPath = "//span[text() = 'Join']/ancestor::div[25]"
-  htmlChopper(xPath)
+  const xPath = `//span[text() = 'Join']${NOT_HIDDEN}/ancestor::div[25]`
+  htmlHider(xPath)
 }
 
 function storiesHomePage() {
-  const xPath = "//a[contains(@href, '/stories/create/')]/ancestor::div[10]"
-  htmlChopper(xPath)
+  const xPath = `//a[contains(@href, '/stories/create/')]${NOT_HIDDEN}/ancestor::div[10]`
+  htmlHider(xPath)
 }
 
 function reelsAndShortVideosHomePage() {
-  const xPath = "(//span[text() = 'Reels']/ancestor::div[contains(@class, 'x1lliihq')])[1]"
-  htmlChopper(xPath)
+  const xPath = `(//span[text() = 'Reels']${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')])[1]`
+  htmlHider(xPath)
 }
 
 function suggestedForYouHomePage() {
-  const xPath = "//span[text() = 'Suggested for you']/ancestor::div[contains(@class, 'x1lliihq')]"
-  htmlChopper(xPath)
+  const xPath = `//span[text() = 'Suggested for you']${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')]`
+  htmlHider(xPath)
 }
 
 function followHomePage() {
-  const spans = document.evaluate("//span[text() = 'Follow']", document, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null)
-  let span = spans.iterateNext()
-  while (span) {
+  const spans = document.evaluate(`//span[text() = 'Follow']${NOT_HIDDEN}`, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
+  for (let i = 0; i < spans.snapshotLength; i++) {
+    const span = spans.snapshotItem(i)
+    if (span.closest(`[${HIDDEN_ATTR}]`)) {
+      continue
+    }
     let isComment = false
     let el = span
     while (el) {
@@ -141,51 +165,49 @@ function followHomePage() {
         ancestor = ancestor.parentElement
         if (ancestor && ancestor.tagName === 'DIV') divCount++
       }
-      if (ancestor) ancestor.remove()
-      return
+      if (ancestor) hideElement(ancestor)
     }
-    span = spans.iterateNext()
   }
 }
 
 function paidPartnershipHomePage() {
-  const xPath = "//span[text() = 'Paid partnership']/ancestor::div[contains(@class, 'x1lliihq')]"
-  htmlChopper(xPath)
+  const xPath = `//span[text() = 'Paid partnership']${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')]`
+  htmlHider(xPath)
 }
 
 function videoPlaylistHomePage() {
-  const xPath = "//span[text() = ' posted a video to the playlist ']/ancestor::div[contains(@class, 'x1lliihq')]"
-  htmlChopper(xPath)
+  const xPath = `//span[text() = ' posted a video to the playlist ']${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')]`
+  htmlHider(xPath)
 }
 
 function isInHomePage() {
-  const xPath = "//span[text() = ' is in ']/ancestor::div[contains(@class, 'x1lliihq')]"
-  htmlChopper(xPath)
+  const xPath = `//span[text() = ' is in ']${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')]`
+  htmlHider(xPath)
 }
 
 function isAtHomePage() {
-  const xPath = "//span[text() = ' is at ']/ancestor::div[contains(@class, 'x1lliihq')]"
-  htmlChopper(xPath)
+  const xPath = `//span[text() = ' is at ']${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')]`
+  htmlHider(xPath)
 }
 
 function andHomePage() {
-  const xPath = "//span[text() = ' and ']/ancestor::div[contains(@class, 'x1lliihq')]"
-  htmlChopper(xPath)
+  const xPath = `//span[text() = ' and ']${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')]`
+  htmlHider(xPath)
 }
 
 function albumHomePage() {
-  const xPath = "//span[text() = 'Album ']/ancestor::div[contains(@class, 'x1lliihq')]"
-  htmlChopper(xPath)
+  const xPath = `//span[text() = 'Album ']${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')]`
+  htmlHider(xPath)
 }
 
 function addedANewPhotoToTheAlbumHomePage() {
-  const xPath = "//span[text() = ' added a new photo to the album ']/ancestor::div[contains(@class, 'x1lliihq')]"
-  htmlChopper(xPath)
+  const xPath = `//span[text() = ' added a new photo to the album ']${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')]`
+  htmlHider(xPath)
 }
 
 function metaAIHomePage() {
-  const xPath = "//div[@role='complementary']//span[text()='Meta AI']/ancestor::li[1]"
-  htmlChopper(xPath)
+  const xPath = `//div[@role='complementary']//span[text()='Meta AI']${NOT_HIDDEN}/ancestor::li[1]`
+  htmlHider(xPath)
 }
 
 //Side bar options on the Home page (navigation) 
@@ -321,29 +343,26 @@ function friendsSideBar() {
 
 //Friends Page
 function pumkFriendsPage() {
-    const xPath = "//span[text() = 'People you may know']/ancestor::div[9]"
-    htmlChopper(xPath)  
+    const xPath = `//span[text() = 'People you may know']${NOT_HIDDEN}/ancestor::div[9]`
+    htmlHider(xPath)  
 }
 
 //Profile Page
 function pumkProfilePage() {
-    const xPath = "//span[text() = 'People you may know']/ancestor::div[7]"
-    htmlChopper(xPath)  
+    const xPath = `//span[text() = 'People you may know']${NOT_HIDDEN}/ancestor::div[7]`
+    htmlHider(xPath)  
 }
 
 //Marketplace
 function sponsoredAdsMarketplace() {
-  const xPath = ".//div[text() = 'Sponsored']/ancestor::div[7]"
-  const result = document.evaluate(xPath, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
-  for (let i = 0; i < result.snapshotLength; i++) {
-    result.snapshotItem(i).remove();
-  }
+  const xPath = `.//div[text() = 'Sponsored']${NOT_HIDDEN}/ancestor::div[7]`
+  htmlHider(xPath)
 }
 
 //Feeds Page
 function sponsoredAdsFeedsPage() {
-  const xPath = "//div[contains(@class, 'sponsored_ad')]/ancestor::div[contains(@class, 'x1lliihq')]"
-  htmlChopper(xPath) 
+  const xPath = `//div[contains(@class, 'sponsored_ad')]${NOT_HIDDEN}/ancestor::div[contains(@class, 'x1lliihq')]`
+  htmlHider(xPath) 
 }
 
 //Groups Feed options

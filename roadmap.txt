@@ -1,0 +1,7 @@
+3. Add Install and Update notification window
+4. Improve Public Website
+5. Boost Extension on Chrome Webstore
+6. Make functions like "is at" and "is in" etc not work on friends posts
+7. Create "select/unselect ALL" buttons for various option groups
+9. Hide "is playing" from the home page news feed
+10. Hide Join from groups feed page
